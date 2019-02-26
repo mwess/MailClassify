@@ -1,0 +1,8 @@
+models/
+data/
+notebooks/
+
+
+*.pyc
+
+.idea
