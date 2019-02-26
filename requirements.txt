@@ -1,0 +1,12 @@
+numpy
+scipy
+matplotlib
+pandas
+nltk
+spacy
+keras
+tensorflow
+gensim
+statsmodels
+scikit-learn
+jupyter
