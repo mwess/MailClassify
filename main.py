@@ -35,12 +35,16 @@ def read_file(fp):
     else:
         exit()
 
+def german_response(b):
+    return 'Ja' if b else 'Nein'
 
 def stringify_result(dct):
-    remote = 'remote: ' + 'Ja' if str(dct['remote']) else 'Nein'
+    remote = 'remote: ' + german_response(dct['remote'])
+    #print('Remoteness: ', dct['remote'])
+    #print('Type? ' , type(dct['remote']))
     locations = 'Ort: ' + ' '.join(dct['locations'])
     technologies = 'Technologien: ' + ' '.join(dct['technologies'])
-    interesting = 'Koennte interessant sein: ' + 'Ja' if dct['interesting'] else 'Nein'
+    interesting = 'Koennte interessant sein: ' + german_response(dct['interesting'])
     return '\n'.join([locations, remote, technologies, interesting])
 
 
@@ -61,8 +65,10 @@ def main():
         mail_eval = decide_mail_importance(mail_eval)
         results.append(mail_eval)
     for idx, result in enumerate(results):
+        #stringify_result(result)
         write_result_to_file(sys.argv[2], stringify_result(result))
-        print(stringify_result(result))
+        #print(stringify_result(result))
+        #print('Remote: ', result['remote'])
 
 
 if __name__ == '__main__':
