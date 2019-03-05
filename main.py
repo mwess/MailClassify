@@ -7,6 +7,7 @@ import pandas as pd
 from src.remote.remote import RemoteClassifier
 from src.location.location import LocationExtraction
 from src.technology.technology import TechnologyExtraction
+from src.logger import CustomLogger
 
 
 def classify_mail_features(mail):
@@ -40,8 +41,6 @@ def german_response(b):
 
 def stringify_result(dct):
     remote = 'remote: ' + german_response(dct['remote'])
-    #print('Remoteness: ', dct['remote'])
-    #print('Type? ' , type(dct['remote']))
     locations = 'Ort: ' + ' '.join(dct['locations'])
     technologies = 'Technologien: ' + ' '.join(dct['technologies'])
     interesting = 'Koennte interessant sein: ' + german_response(dct['interesting'])
@@ -65,10 +64,8 @@ def main():
         mail_eval = decide_mail_importance(mail_eval)
         results.append(mail_eval)
     for idx, result in enumerate(results):
-        #stringify_result(result)
         write_result_to_file(sys.argv[2], stringify_result(result))
-        #print(stringify_result(result))
-        #print('Remote: ', result['remote'])
+        CustomLogger.log_result(stringiy_result(result))
 
 
 if __name__ == '__main__':
